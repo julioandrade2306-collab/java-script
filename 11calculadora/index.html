@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        /* Reset básico para remover margens e paddings padrão,
+        além de usar uma fonte moderna e garantir layout consistente */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Faz com que o padding e a borda sejam incluídos na largura total do elemento */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define uma fonte limpa e legível */
+        }
+
+        /* Estilo para o corpo da página */
+        body {
+            background: linear-gradient(135deg, #0bfb0b, #0b0147); /* Define um fundo com gradiente azul em 135 graus */
+            height: 100vh; /* Faz o body ocupar toda a altura da janela */
+            display: flex; /* Utiliza flexbox para controlar o conteúdo */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+        }
+
+        /* Estiliza a tag <main>, onde está a calculadora */
+        main {
+            background-color: #e7f804; /* Cor de fundo escura para destacar a calculadora */
+            padding: 20px; /* Espaço interno ao redor da calculadora */
+            border-radius: 20px; /* Cantos arredondados */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Sombra ao redor para efeito de profundidade */
+        }
+
+        /* Estiliza o título da calculadora */
+        h1 {
+            color: #fff; /* Cor branca no texto */
+            text-align: center; /* Centraliza o texto */
+            margin-bottom: 20px; /* Espaço inferior abaixo do título */
+            font-size: 28px; /* Tamanho da fonte */
+        }
+
+        /* Estiliza o formulário */
+        form {
+            display: flex; /* flexbox para layout em coluna */
+            flex-direction: column; /* Coloca os elementos um abaixo do outro */
+            gap: 15px; /* Espaço entre os elementos do formulário */
+        }
+
+        /* Estilo para o campo de entrada da expressão */
+        input[name="expressao"] {
+            background-color: #187980; /* Fundo escuro do campo */
+            color: #d6d6d6; /* Cor do texto, variação de cinza */
+            font-size: 30px; /* Tamanho grande para os números */
+            padding: 15px; /* Espaço interno */
+            border: none; /* Remove a borda padrão */
+            border-radius: 10px; /* Cantos arredondados */
+            text-align: right; /* Alinha o texto à direita */
+            pointer-events: none; /* Impede interação com o campo (somente leitura) */
+        }
+
+        /* Estiliza a área dos botões */
+        .options {
+            display: grid; /* Usa grid layout para organizar os botões */
+            grid-template-columns: repeat(4, 60px); /* Cria 4 colunas com largura de 60px cada */
+            gap: 10px; /* Espaçamento entre os botões */
+            justify-content: center; /* Centraliza os botões horizontalmente */
+        }
+
+        /* Estilo padrão para cada botão (span) */
+        .options span {
+            background-color: #f300e7; /* Cor de fundo cinza claro */
+            padding: 15px; /* Espaço interno do botão */
+            font-size: 18px; /* Tamanho da fonte dos botões */
+            text-align: center; /* Centraliza o conteúdo dentro do botão */
+            border-radius: 10px; /* Cantos arredondados */
+            cursor: pointer; /* Altera o cursor para indicar que é clicável */
+            transition: all 0.2s ease-out; /* Transição suave para hover e transformações */
+            user-select: none; /* Impede que o texto seja selecionado ao clicar */
+            font-weight: bold; /* Deixa o texto em negrito */
+        }
+
+        /* Efeito ao passar o mouse sobre os botões */
+        .options span:hover {
+            background-color: #ffffff; /* Muda a cor de fundo no hover */
+            transform: scale(1.05); /* Aumenta ligeiramente o botão */
+        }
+
+        /* Estiliza o botão especial LIMPA */
+        .options span.limpa {
+            grid-column: span 4; /* Faz com que ocupe as 4 colunas da grade */
+            background-color: #0a0878; /* Vermelho escuro */
+            color: rgb(255, 0, 0); /* Texto branco */
+        }
+
+        /* Efeito hover no botão LIMPA */
+        .options span.limpa:hover {
+            background-color: #121697; /* Vermelho mais escuro ao passar o mouse */
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Calculadora</h1>
+        <form name="calculadora">
+            <input type="text" name="expressao" readonly />
+            <div class="options">
+                <span class="limpa">LIMPA</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>*</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>-</span>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>+</span>
+                <span>/</span>
+                <span>0</span>
+                <span>,</span>
+                <span>=</span>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        // Seleciona todos os elementos <span> dentro do <form> (que são os botões da calculadora)
+        document.querySelectorAll('form span').forEach(item => {
+            // Adiciona um ouvinte de evento de clique em cada botão
+            item.addEventListener('click', () => {
+                // Quando clicado, chama a função addVal e envia o conteúdo (número ou operador) do botão
+                addVal(item.innerHTML);
+            });
+        });
+
+        // Função que trata o valor clicado e atualiza o campo de expressão
+        function addVal(valor) {
+
+            // 1. Verifica se o botão clicado foi "LIMPA"
+            if (valor === 'LIMPA') {
+                // Se for, limpa o conteúdo do campo da expressão
+                document.calculadora.expressao.value = "";
+            }
+
+            // 2. Se o botão clicado for "=" (igual), realiza o cálculo
+            else if (valor === '=') {
+                try {
+                    // Substitui vírgulas por pontos para compatibilidade com eval()
+                    let resultado = eval(document.calculadora.expressao.value.replaceAll(',', '.'));
+
+                    // Converte o resultado para string e substitui ponto por vírgula novamente
+                    document.calculadora.expressao.value = resultado.toString().replaceAll('.', ',');
+                } catch (e) {
+                    // Se ocorrer algum erro (ex: expressão inválida), exibe "Erro"
+                    document.calculadora.expressao.value = "Erro";
+                }
+            }
+            
+            // 3. Caso contrário (qualquer outro botão), adiciona o valor clicado à expressão
+            else {
+                document.calculadora.expressao.value += valor;
+            }
+        }
+    </script>
+</body>
+
+</html>

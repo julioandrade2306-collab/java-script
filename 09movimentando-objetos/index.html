@@ -28,7 +28,7 @@
       margin-top: 10px; /* Espaço superior */
       font-size: 2em; /* Tamanho da fonte */
       margin-bottom: 5px; /* Espaço inferior */
-      background: linear-gradient(to right, #00c853, #64dd17); /* Texto com degradê */
+      background: linear-gradient(to right, #02883a, #64dd17); /* Texto com degradê */
       -webkit-background-clip: text; /* Aplica o fundo ao texto */
       -webkit-text-fill-color: transparent; /* Deixa o texto transparente para ver o fundo */
       text-shadow: 1px 1px 2px black; /* Sombra no texto */
@@ -45,9 +45,9 @@
     #gameContainer {
       position: relative; /* Para posicionamento absoluto do objeto */
       width: fit-content; /* Tamanho ajustado ao conteúdo */
-      border: 4px solid #64dd17; /* Borda verde */
+      border: 4px solid #9d00ff; /* Borda verde */
       border-radius: 12px; /* Cantos arredondados */
-      box-shadow: 0 0 20px #00e676; /* Brilho ao redor */
+      box-shadow: 0 0 20px #f306ff; /* Brilho ao redor */
     }
 
     canvas {
@@ -86,7 +86,7 @@
       background-color: #003300; /* Fundo escuro */
       padding: 10px; /* Espaçamento interno */
       border-radius: 10px; /* Cantos arredondados */
-      box-shadow: 0 0 10px #00e676; /* Brilho externo */
+      box-shadow: 0 0 10px #186841; /* Brilho externo */
       margin-bottom: 20px; /* Espaço inferior */
     }
 
@@ -102,7 +102,7 @@
     }
 
     #reiniciar:hover {
-      background-color: #00e676; /* Cor ao passar o mouse */
+      background-color: #329c69; /* Cor ao passar o mouse */
     }
   </style>
 </head>
@@ -143,7 +143,7 @@
     let historicoTempos = []; // Array de tempos registrados
 
     const maze = [
-[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
 [1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,0,1],
 [1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,0,0,0,1],
